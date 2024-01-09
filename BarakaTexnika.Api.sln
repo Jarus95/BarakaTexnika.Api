@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarakaTexnika.Api", "BarakaTexnika.Api\BarakaTexnika.Api.csproj", "{FD4A9DE8-4468-4DCC-8BB1-86B5D9069CD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarakaTexnika.Api.Infrastructure.Build", "BarakaTexnika.Api.Infrastructure.Build\BarakaTexnika.Api.Infrastructure.Build.csproj", "{ADC9313A-2FC5-494A-9A77-956DFF818DC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FD4A9DE8-4468-4DCC-8BB1-86B5D9069CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD4A9DE8-4468-4DCC-8BB1-86B5D9069CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD4A9DE8-4468-4DCC-8BB1-86B5D9069CD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADC9313A-2FC5-494A-9A77-956DFF818DC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADC9313A-2FC5-494A-9A77-956DFF818DC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADC9313A-2FC5-494A-9A77-956DFF818DC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADC9313A-2FC5-494A-9A77-956DFF818DC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
