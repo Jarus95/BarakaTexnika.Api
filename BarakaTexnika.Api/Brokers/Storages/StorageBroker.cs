@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using BarakaTexnika.Api.Employees;
 using EFxceptions;
 using Microsoft.EntityFrameworkCore;
 
