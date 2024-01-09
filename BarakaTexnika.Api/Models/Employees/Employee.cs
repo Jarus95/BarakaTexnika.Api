@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BarakaTexnika.Api.Employees
+namespace BarakaTexnika.Api.Models.Employees
 {
     public class Employee
     {

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System;
-using BarakaTexnika.Api.Employees;
+using BarakaTexnika.Api.Models.Employees;
 
 namespace BarakaTexnika.Api.Brokers.Storages
 {
