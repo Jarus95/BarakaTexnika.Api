@@ -17,9 +17,10 @@ namespace BarakaTexnika.Api.Services.Employees
             this.loggingBroker = loggingBroker;
         }
 
-        public ValueTask<Employee> AddEmployeeAsync(Employee employee) =>
+        public ValueTask<Employee> AddEmployeeAsync(EmployeeDTO employeeDto) =>
         TryCatch(async () =>
         {
+            Employee employee = MapEmployee(employeeDto);
             ValidateEmployeeOnAdd(employee);
             return await this.storageBroker.InsertEmployeeAsync(employee);
         });
@@ -44,6 +45,20 @@ namespace BarakaTexnika.Api.Services.Employees
         public ValueTask<Employee> RetrieveEmployeeByIdAsync(Guid employeeId)
         {
             throw new NotImplementedException();
+        }
+
+        private Employee MapEmployee(EmployeeDTO employeeDto)
+        {
+            Employee employee = new Employee()
+            {
+                Id = Guid.NewGuid(),
+                Name = employeeDto.Name,
+                Age = employeeDto.Age,
+                JobTitle = employeeDto.JobTitle,
+                Salary = employeeDto.Salary
+            };
+
+            return employee;
         }
     }
 }
