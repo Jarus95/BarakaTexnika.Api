@@ -1,4 +1,6 @@
+using BarakaTexnika.Api.Brokers.Loggings;
 using BarakaTexnika.Api.Brokers.Storages;
+using BarakaTexnika.Api.Services.Employees;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IStorageBroker, StorageBroker>();
+builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
+builder.Services.AddSingleton<ILoggingBroker, LoggingBroker>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
