@@ -70,7 +70,7 @@ namespace BarakaTexnika.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IQueryable<Employee>> GetAllEmployee()
+        public ActionResult<IQueryable<Employee>> GetAllEmployees()
         {
             try
             {
@@ -83,6 +83,26 @@ namespace BarakaTexnika.Api.Controllers
                     employeeDependencyException.InnerException.Message);
             }
             catch(EmployeeServiceException employeeServiceException)
+            {
+                return BadRequest(employeeServiceException.Message + " " +
+                  employeeServiceException.InnerException.Message);
+            }
+        }
+
+        [HttpGet("Salary more 50000")]
+        public ActionResult<IQueryable<Employee>> GetEmployees()
+        {
+            try
+            {
+                IQueryable<Employee> employees = this.employeeService.RetrieveAllEmployees().Where(e => e.Salary > 50000);
+                return Ok(employees);
+            }
+            catch (EmployeeDependencyException employeeDependencyException)
+            {
+                return BadRequest(employeeDependencyException.Message + " " +
+                    employeeDependencyException.InnerException.Message);
+            }
+            catch (EmployeeServiceException employeeServiceException)
             {
                 return BadRequest(employeeServiceException.Message + " " +
                   employeeServiceException.InnerException.Message);
