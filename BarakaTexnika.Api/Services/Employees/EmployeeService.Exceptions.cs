@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using BarakaTexnika.Api.Models.Employees;
 using BarakaTexnika.Api.Models.Employees.Exceptions;
@@ -11,6 +12,27 @@ namespace BarakaTexnika.Api.Services.Employees
     public partial class EmployeeService
     {
         private delegate ValueTask<Employee> ReturningEmployeeFunction();
+        private delegate IQueryable<Employee> ReturningEmployeesFunction();
+
+        private IQueryable<Employee> TryCatch(ReturningEmployeesFunction returningEmployeesFunction)
+        {
+            try
+            {
+                return returningEmployeesFunction();
+            }
+            catch (SqlException sqlException)
+            {
+                var failedEmployeeStorageException =
+                    new FailedEmployeeStorageException(sqlException);
+                throw CreateAndLogCriticalDependencyException(failedEmployeeStorageException);
+            }
+            catch (Exception exception)
+            {
+                var failedEmployeeServiceException =
+                    new FailedEmployeeServiceException(exception);
+                throw CreateAndLogServiceException(failedEmployeeServiceException);
+            }
+        }
 
         private async ValueTask<Employee> TryCatch(ReturningEmployeeFunction returningEmployeeFunction)
         {
