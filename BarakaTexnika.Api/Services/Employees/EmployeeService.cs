@@ -17,29 +17,31 @@ namespace BarakaTexnika.Api.Services.Employees
             this.loggingBroker = loggingBroker;
         }
 
-        public ValueTask<Employee> AddUserAsync(Employee employee) =>
+        public ValueTask<Employee> AddEmployeeAsync(Employee employee) =>
         TryCatch(async () =>
         {
             ValidateEmployeeOnAdd(employee);
             return await this.storageBroker.InsertEmployeeAsync(employee);
         });
 
-        public ValueTask<Employee> ModifyUserAsync(Employee employee)
+        public IQueryable<Employee> RetrieveAllEmployees() =>
+        TryCatch(() =>
+        {
+           return this.storageBroker.SelectAllEmployees();
+
+        });
+
+        public ValueTask<Employee> ModifyEmployeeAsync(Employee employee)
         {
             throw new NotImplementedException();
         }
 
-        public ValueTask<Employee> RemoveUserAsync(Guid employeeId)
+        public ValueTask<Employee> RemoveEmployeeAsync(Guid employeeId)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<Employee> RetrieveAllUsers()
-        {
-            throw new NotImplementedException();
-        }
-
-        public ValueTask<Employee> RetrieveUserByIdAsync(Guid employeeId)
+        public ValueTask<Employee> RetrieveEmployeeByIdAsync(Guid employeeId)
         {
             throw new NotImplementedException();
         }

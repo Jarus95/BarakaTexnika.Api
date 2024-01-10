@@ -7,10 +7,10 @@ namespace BarakaTexnika.Api.Services.Employees
 {
     public interface IEmployeeService
     {
-        ValueTask<Employee> AddUserAsync(Employee employee);
-        ValueTask<Employee> RetrieveUserByIdAsync(Guid employeeId);
-        IQueryable<Employee> RetrieveAllUsers();
-        ValueTask<Employee> ModifyUserAsync(Employee employee);
-        ValueTask<Employee> RemoveUserAsync(Guid employeeId);
+        ValueTask<Employee> AddEmployeeAsync(Employee employee);
+        ValueTask<Employee> RetrieveEmployeeByIdAsync(Guid employeeId);
+        IQueryable<Employee> RetrieveAllEmployees();
+        ValueTask<Employee> ModifyEmployeeAsync(Employee employee);
+        ValueTask<Employee> RemoveEmployeeAsync(Guid employeeId);
     }
 }
