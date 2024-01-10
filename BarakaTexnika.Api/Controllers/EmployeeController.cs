@@ -68,5 +68,25 @@ namespace BarakaTexnika.Api.Controllers
                       employeeServiceException.InnerException.Message);
             }
         }
+
+        [HttpGet]
+        public ActionResult<IQueryable<Employee>> GetAllEmployee()
+        {
+            try
+            {
+                IQueryable<Employee> employees = this.employeeService.RetrieveAllEmployees();
+                return Ok(employees);
+            }
+            catch (EmployeeDependencyException employeeDependencyException)
+            {
+                return BadRequest(employeeDependencyException.Message + " " +
+                    employeeDependencyException.InnerException.Message);
+            }
+            catch(EmployeeServiceException employeeServiceException)
+            {
+                return BadRequest(employeeServiceException.Message + " " +
+                  employeeServiceException.InnerException.Message);
+            }
+        }
     }
 }
