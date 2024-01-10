@@ -17,12 +17,12 @@ namespace BarakaTexnika.Api.Brokers.Storages
             SelectAll<Employee>();
 
         public async ValueTask<Employee> UpdateEmployeeAsync(Employee employee) =>
-           await UpdateEmployeeAsync(employee);
+           await UpdateAsync(employee);
 
         public async ValueTask<Employee> SelectEmployeeByIdAsync(Guid id) =>
-            await SelectEmployeeByIdAsync(id);
+            await SelectAsync<Employee>(id);
 
         public async ValueTask<Employee> DeleteEmployeeAsync(Employee employee) =>
-            await DeleteEmployeeAsync(employee);
+            await DeleteAsync(employee);
     }
 }
