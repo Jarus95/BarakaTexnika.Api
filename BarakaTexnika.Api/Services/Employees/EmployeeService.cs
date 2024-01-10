@@ -28,14 +28,21 @@ namespace BarakaTexnika.Api.Services.Employees
         public IQueryable<Employee> RetrieveAllEmployees() =>
         TryCatch(() =>
         {
-           return this.storageBroker.SelectAllEmployees();
+            return this.storageBroker.SelectAllEmployees();
 
         });
 
-        public ValueTask<Employee> ModifyEmployeeAsync(Employee employee)
+        public ValueTask<Employee> ModifyEmployeeAsync(Employee employee) =>
+        TryCatch(async () =>
         {
-            throw new NotImplementedException();
-        }
+            ValidateEmployeeOnModify(employee);
+
+            Employee maybeEmployee = await this.storageBroker.SelectEmployeeByIdAsync(employee.Id);
+
+            ValidateEmployeeNotFound(maybeEmployee);
+
+            return await this.storageBroker.UpdateEmployeeAsync(employee);
+        });
 
         public ValueTask<Employee> RemoveEmployeeAsync(Guid employeeId)
         {
