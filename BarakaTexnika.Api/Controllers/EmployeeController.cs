@@ -88,5 +88,57 @@ namespace BarakaTexnika.Api.Controllers
                   employeeServiceException.InnerException.Message);
             }
         }
+
+        [HttpPut]
+        public async ValueTask<ActionResult<Employee>> EditEmployee(Employee employee)
+        {
+            try
+            {
+                Employee maybeEmployee = await this.employeeService.ModifyEmployeeAsync(employee);
+                return Ok(maybeEmployee);
+            }
+            catch (EmployeeValidationException employeeValidationException)
+                when (employeeValidationException.InnerException is NullEmployeeException)
+            {
+
+                return BadRequest(employeeValidationException.Message + " " +
+                        employeeValidationException.InnerException.Message);
+            }
+            catch (EmployeeValidationException employeeValidationException)
+                when (employeeValidationException.InnerException is InvalidEmployeeException)
+            {
+
+                Xeption innerException = (Xeption)employeeValidationException.InnerException;
+                string exception = innerException.Message;
+                foreach (DictionaryEntry item in innerException.Data)
+                {
+                    string errorSummary = ((List<string>)item.Value)
+                        .Select((string value) => value)
+                        .Aggregate((string current, string next) => current + ", " + next);
+                    exception += "\n" + item.Key + " - " + errorSummary;
+                }
+                return BadRequest(exception);
+            }
+            catch(EmployeeValidationException employeeValidationException)
+            {
+                return BadRequest(employeeValidationException.Message + " " +
+                   employeeValidationException.InnerException.Message);
+            }
+            catch (EmployeeDependencyValidationException employeeDependencyValidationException)
+            {
+                return BadRequest(employeeDependencyValidationException.Message + " " +
+                   employeeDependencyValidationException.InnerException.Message);
+            }
+            catch (EmployeeDependencyException employeeDependencyException)
+            {
+                return BadRequest(employeeDependencyException.Message + " " +
+                        employeeDependencyException.InnerException.Message);
+            }
+            catch (EmployeeServiceException employeeServiceException)
+            {
+                return BadRequest(employeeServiceException.Message + " " +
+                      employeeServiceException.InnerException.Message);
+            }
+        }
     }
 }
