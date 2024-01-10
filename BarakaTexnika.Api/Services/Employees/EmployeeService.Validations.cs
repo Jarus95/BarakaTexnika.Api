@@ -18,6 +18,27 @@ namespace BarakaTexnika.Api.Services.Employees
              );
 
         }
+        private void ValidateEmployeeOnModify(Employee employee)
+        {
+            ValidateEmployeeNotNull(employee);
+            Validate(
+               (Rule: IsInvalid(employee.Id), Parameter: nameof(employee.Id)),
+               (Rule: IsInvalid(employee.Name), Parameter: nameof(employee.Name)),
+               (Rule: IsInvalid(employee.Age), Parameter: nameof(employee.Age)),
+               (Rule: IsInvalid(employee.Salary), Parameter: nameof(employee.Salary)),
+               (Rule: IsInvalid(employee.JobTitle), Parameter: nameof(employee.JobTitle))
+               );
+        }
+
+        private void ValidateEmployeeNotFound(Employee maybeEmployee)
+        {
+            if(maybeEmployee is null)
+            {
+                throw new NotFoundEmployeeException(maybeEmployee.Id);
+            }
+        }
+
+
         private dynamic IsInvalid(Guid id) => new
         {
             Condition = id == default,

@@ -62,6 +62,10 @@ namespace BarakaTexnika.Api.Services.Employees
 
                 throw CreateAndLogCriticalDependencyException(failedEmployeeStorageException);
             }
+            catch(NotFoundEmployeeException notFoundEmployeeException)
+            {
+                throw CreateAndLogValidationException(notFoundEmployeeException);
+            }
             catch (Exception exception) 
             {
                 var failedEmployeeServiceException =
